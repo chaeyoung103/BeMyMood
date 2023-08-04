@@ -1,0 +1,6 @@
+framework module Pods_BeMyMood_BeMyMoodUITests {
+  umbrella header "Pods-BeMyMood-BeMyMoodUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

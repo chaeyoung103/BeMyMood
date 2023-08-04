@@ -10,13 +10,49 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    var navigationController : UINavigationController?
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        window = UIWindow(windowScene: windowScene)
+        self.navigationController = UINavigationController(rootViewController: createTabBarController())
+        self.navigationController?.navigationBar.isHidden = true
+        self.window?.rootViewController = self.navigationController
+        self.window?.makeKeyAndVisible()
+    }
+    func createTabBarController() -> UITabBarController {
+            let tabBarController = UITabBarController()
+            tabBarController.viewControllers = [createFirstViewController(), createSecondViewController(), createThirdViewController(),createFourViewController()]
+            return tabBarController
+        }
+        
+        func createFirstViewController() -> UIViewController {
+            let firstViewController = HomeViewController()
+            firstViewController.tabBarItem = UITabBarItem(title: "홈", image: UIImage(named: "circle"), tag: 0)
+            return firstViewController
+        }
+        
+        func createSecondViewController() -> UIViewController {
+            let secondViewController = MoodBoardViewController()
+            secondViewController.tabBarItem = UITabBarItem(title: "무드보드", image: UIImage(named: "circle"), tag: 1)
+            return secondViewController
+        }
+        
+        func createThirdViewController() -> UIViewController {
+            let thirdViewController = CommunityViewController()
+            thirdViewController.tabBarItem = UITabBarItem(title: "커뮤니티", image: UIImage(named: "circle"), tag: 2)
+            return thirdViewController
+        }
+    
+    func createFourViewController() -> UIViewController {
+        let thirdViewController = ProfileViewController()
+        thirdViewController.tabBarItem = UITabBarItem(title: "내프로필", image: UIImage(named: "circle"), tag: 2)
+        return thirdViewController
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
